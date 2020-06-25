@@ -1,0 +1,170 @@
+<!DOCTYPE hmtl> 
+<html lang='pt-BR'>
+<head>
+    <title>Leap Year checker</title>
+    <meta name='viewport' content='width=device-width,initial-scale=1.0'/>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="refresh" content='102'/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+    
+        <style>
+            *{
+                font-family: sans-serif;
+                text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.287);
+            }
+            
+            
+            div#app h1{
+                position:absolute;
+                left:710px;
+                top:210px;
+                font-size:60px;
+                background-color:rgb(255, 255, 255);
+                letter-spacing: 1.8px;
+                font-weight: 800;
+            }
+            div#app  button{
+                position:absolute; 
+                left:710px;
+                top:340px;
+                font-size:25px;
+                border-radius:10px;
+                background-color: rgb(255, 255, 255);
+                transition:0.4s;
+            }
+            div#app button:hover{
+                transform: scale(1.12);
+                transition:0.4s;
+            }
+            div#app input{
+                position:absolute; 
+                left:798px;
+                top:340px;
+                height:34px;
+                font-size:26px;
+                border-radius:10px;
+                outline-color: grey;
+                background-color:white;
+                transition:0.2s;
+            }
+           div#app input:hover{
+               border:1px solid grey;
+               transition:0.2s;
+           }
+            div#app h4{
+                position:absolute;
+                top:350px;
+                left:700px;
+                color:rgb(0, 0, 0);
+                font-size:32px;
+                
+            } 
+            .right{
+                filter: drop-shadow(0 0 10px rgba(0, 128, 0, 0.746));
+            }   
+            .wrong{
+                filter: drop-shadow(0 0 10px rgba(230, 57, 34, 0.699));
+            }
+            img{
+                opacity:0.1;
+                z-index: -1;
+                width:100%;
+                height:100%;
+                pointer-events: none;
+            }
+            button#entire{
+                position: absolute;
+                width:100px;
+                height:40px;
+            }
+            i{
+                position:absolute;
+                left:1140px;
+                top:345px;
+                font-size:25px;
+                transition:0.4s;
+            }
+            i:hover{
+                transform: rotate(360deg);
+                transition:0.4s;
+            }
+        </style>
+</head>
+<body>  
+   
+    <div id='app'>
+        <h1> Leap year checker </h1>
+
+        <input type="number" id='insertYear' onkeypress="checkArrow(event)" placeholder="Insert a year">
+
+        <i class="fas fa-history" onclick='showEntireYears()' ></i> 
+
+        <button onclick='check()'>Verify</button>
+        <h4 id='result'></h4>
+        
+    </div>
+ 
+    <script>
+        var inputYear=window.document.getElementById('insertYear') 
+        var res=window.document.getElementById('result')
+
+        function check(){
+            if(inputYear.value!='' && isNaN(inputYear.value)==false){
+               checkValues()
+            }else{
+                alert('Fill out the check box, please')
+                inputYear.focus()
+             
+            }
+        } 
+       
+        function checkArrow(e){
+            if(e.keyCode==13){
+                if(inputYear.value!='' && isNaN(inputYear.value)==false){
+               checkValues()
+            }else{
+                alert('Fill out the check box, please')
+                inputYear.focus()
+             
+            }
+            }
+        }
+
+         window.addEventListener('load',focusInsert) 
+         
+            function focusInsert(){
+                inputYear.focus()
+            }
+
+            function checkValues(){
+                 if(inputYear.value%4==0){
+                    res.innerHTML=`${inputYear.value} is a leap year ✔️`
+                    res.style.backgroundColor='rgba('+58+','+168+','+58+','+0.45+')'
+                    res.setAttribute('class','right')
+                    inputYear.value=''
+                    inputYear.focus()
+                }else{
+                    res.innerHTML=`${inputYear.value} isn't a leap year ❌`
+                    res.style.backgroundColor='rgba('+248+','+74+','+21+','+0.45+')'
+                    res.setAttribute('class','wrong')
+                    inputYear.value=''
+                    inputYear.focus()
+                }
+            } 
+  
+ 
+            function showEntireYears(){
+                var yearsWindow=window.open('','','width=200px,height=900px,top=70px')
+                var getActualYear=new Date().getFullYear()
+                for(var i=0;i<=getActualYear;i++){
+                    if(i%4==0){
+                        yearsWindow.document.write(i +'<br>'+'<hr>')
+                    }
+                }
+            } 
+
+           
+    </script>
+</body>
+</html>
+
